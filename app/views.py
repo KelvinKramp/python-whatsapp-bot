@@ -107,6 +107,7 @@ def webhook_post():
 def twilio_webhook():
     incoming_body = request.values.get("Body", "")
     sender = request.values.get("From", "")
+    print("request.values",request.values)
     if not incoming_body:
         logging.warning("Twilio webhook received without Body")
         return jsonify({"status": "error", "message": "Missing Body"}), 400
