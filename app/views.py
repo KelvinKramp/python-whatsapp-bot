@@ -77,6 +77,20 @@ def verify():
         return jsonify({"status": "error", "message": "Missing parameters"}), 400
 
 
+@webhook_blueprint.route("/", methods=["GET"])
+def index():
+    return jsonify({
+        "service": "WhatsApp2 Webhook API",
+        "status": "running",
+        "version": "1.0.0",
+        "endpoints": {
+            "webhook": "/webhook",
+            "health": "/",
+        },
+        "documentation": "https://developers.facebook.com/docs/whatsapp/cloud-api",
+    }), 200
+
+
 @webhook_blueprint.route("/webhook", methods=["GET"])
 def webhook_get():
     return verify()
