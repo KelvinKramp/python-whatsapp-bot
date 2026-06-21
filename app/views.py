@@ -8,6 +8,7 @@ from .utils.whatsapp_utils import (
     process_whatsapp_message,
     is_valid_whatsapp_message,
 )
+from .utils.twilio_utils import process_twilio_message
 
 webhook_blueprint = Blueprint("webhook", __name__)
 
@@ -85,6 +86,7 @@ def index():
         "version": "1.0.0",
         "endpoints": {
             "webhook": "/webhook",
+            "twilio_webhook": "/webhook/twilio",
             "health": "/",
         },
         "documentation": "https://developers.facebook.com/docs/whatsapp/cloud-api",
@@ -99,5 +101,15 @@ def webhook_get():
 @signature_required
 def webhook_post():
     return handle_message()
+
+
+@webhook_blueprint.route("/webhook/twilio", methods=["POST"])
+def twilio_webhook():
+    incoming_body = request.values.get("Body", "")
+    sender = request.values.get("From", "")
+    if not incoming_body:
+        logging.warning("Twilio webhook received without Body")
+        return jsonify({"status": "error", "message": "Missing Body"}), 400
+    return process_twilio_message(incoming_body, sender)
 
 

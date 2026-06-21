@@ -14,6 +14,10 @@ def load_configurations(app):
     app.config["VERSION"] = os.getenv("VERSION")
     app.config["PHONE_NUMBER_ID"] = os.getenv("PHONE_NUMBER_ID")
     app.config["VERIFY_TOKEN"] = os.getenv("VERIFY_TOKEN")
+    app.config["TWILIO_ACCOUNT_SID"] = os.getenv("TWILIO_ACCOUNT_SID")
+    app.config["TWILIO_AUTH_TOKEN"] = os.getenv("TWILIO_AUTH_TOKEN")
+    app.config["TWILIO_WHATSAPP_FROM"] = os.getenv("TWILIO_WHATSAPP_FROM")
+    app.config["TWILIO_WHATSAPP_TO"] = os.getenv("TWILIO_WHATSAPP_TO")
 
 
 def configure_logging():
