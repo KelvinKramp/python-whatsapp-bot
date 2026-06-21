@@ -65,6 +65,7 @@ venv/
 
 # Runtime data
 threads_db*
+conversations_db*
 
 # Database
 *.db
