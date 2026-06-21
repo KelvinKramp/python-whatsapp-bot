@@ -56,8 +56,15 @@ docs/_build/
 # PyBuilder
 target/
 
+# Virtual environments
+.venv/
+venv/
+
 # DotEnv configuration
 .env
+
+# Runtime data
+threads_db*
 
 # Database
 *.db
