@@ -50,6 +50,14 @@ def generate_response(message_body: str, user_id: str, name: str) -> str:
         input=message_body,
         conversation=conversation_id,
         instructions=OPENAI_INSTRUCTIONS.format(name=name),
+                tools=[
+            {
+                "type": "mcp",
+                "server_label": "ns_mcp_server",
+                "server_url": os.getenv("MCP_SERVER_URL"),  # e.g. https://your-vm.com/mcp
+                "require_approval": "never",
+            }
+        ],
     )
 
     logging.info("Generated message for %s: %s", name, response.output_text)
